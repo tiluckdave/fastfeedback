@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Box, Button, Code, Flex, Heading, Text } from '@chakra-ui/react'
+import { Button, Code, Flex, Heading, Text } from '@chakra-ui/react'
 
 import { useAuth } from '@/lib/auth'
 import Icon from '@/components/Icon'
@@ -20,12 +20,12 @@ export default function Home() {
         Current user: <Code>{auth.user ? auth.user.email : 'None'}</Code>
       </Text>
       {auth.user ? (
-        <Button as="a" href="/dashboard">
+        <Button mt={4} as="a" href="/dashboard">
           View Dashboard
         </Button>
       ) : (
-        <Button mt={4} size="sm" onClick={(e) => auth.signinWithGitHub()}>
-          Sign In
+        <Button mt={4} onClick={(e) => auth.signinWithGitHub()}>
+          <Icon name="github" boxSize="8" mr="2" />Sign in with GitHub
         </Button>
       )}
     </Flex>
