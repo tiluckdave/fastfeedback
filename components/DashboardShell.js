@@ -1,10 +1,6 @@
 import React from 'react';
 import {
     Box,
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    Heading,
     Button,
     Flex,
     Link,
@@ -12,13 +8,13 @@ import {
 } from '@chakra-ui/react';
 import Icon from '@/components/Icon';
 import { useAuth } from '@/lib/auth';
-import AddSiteModal from './AddSiteModal';
+import NextLink from 'next/link';
 
 const DashboardShell = ({ children }) => {
     const { user, signout } = useAuth();
 
     return (
-        <Box backgroundColor="gray.100" h="100vh">
+        <Box background="gray.100" minH="100vh">
             <Flex backgroundColor="white" mb={16} w="full">
                 <Flex
                     alignItems="center"
@@ -30,10 +26,18 @@ const DashboardShell = ({ children }) => {
                     w="full"
                     px={8}
                 >
-                    <Flex>
-                        <Icon name="logo" boxSize="24px" mr={8} />
-                        <Link mr={4}>Sites</Link>
-                        <Link>Feedback</Link>
+                    <Flex align="center">
+                        <NextLink href="/" passHref>
+                            <Link>
+                                <Icon name="logo" boxSize="24px" mr={8} />
+                            </Link>
+                        </NextLink>
+                        <NextLink href="/dashboard" passHref>
+                            <Link mr={4}>Sites</Link>
+                        </NextLink>
+                        <NextLink href="/feedback" passHref>
+                            <Link>Feedback</Link>
+                        </NextLink>
                     </Flex>
                     <Flex justifyContent="center" alignItems="center">
                         {user && <Button variant="ghost" mr={2} onClick={() => signout()}>
@@ -44,17 +48,6 @@ const DashboardShell = ({ children }) => {
                 </Flex>
             </Flex>
             <Flex margin="0 auto" direction="column" maxW="1250px" px={8}>
-                <Breadcrumb>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink>Sites</BreadcrumbLink>
-                    </BreadcrumbItem>
-                </Breadcrumb>
-                <Flex justifyContent="space-between">
-                    <Heading mb={8}>My Sites</Heading>
-                    <AddSiteModal>
-                        + Add Site
-                    </AddSiteModal>
-                </Flex>
                 {children}
             </Flex>
         </Box>
