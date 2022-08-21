@@ -43,7 +43,7 @@ function DeleteFeedbackButton({ feedbackId }) {
                             Delete Feedback
                         </AlertDialogHeader>
                         <AlertDialogBody>
-                            Are you sure? You can't undo this action afterwards.
+                            Are you sure? You can{`'`}t undo this action afterwards.
                         </AlertDialogBody>
                         <AlertDialogFooter>
                             <Button ref={cancelRef} onClick={onClose}>
