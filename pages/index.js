@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <Box background="gray.100">
-      <Flex as="main" direction='column' align='center' justify='center' h='100vh' gap={4}>
+      <Flex as="main" direction='column' align='center' justify='center' minH='100vh' gap={4}>
         <Head>
           <script
             dangerouslySetInnerHTML={{
