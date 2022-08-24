@@ -11,11 +11,11 @@ import { useAuth } from '@/lib/auth';
 import NextLink from 'next/link';
 
 const DashboardShell = ({ children }) => {
-    const { user, signout } = useAuth();
+    const { user } = useAuth();
 
     return (
         <Box background="gray.100" minH="100vh">
-            <Flex backgroundColor="white" mb={16} w="full">
+            <Flex backgroundColor="white" mb={16} w="full" borderTop="5px solid #0AF5F4">
                 <Flex
                     alignItems="center"
                     justifyContent="space-between"
@@ -40,9 +40,13 @@ const DashboardShell = ({ children }) => {
                         </NextLink>
                     </Flex>
                     <Flex justifyContent="center" alignItems="center">
-                        {user && <Button variant="ghost" mr={2} onClick={() => signout()}>
-                            Log Out
-                        </Button>}
+                        {user &&
+                            <NextLink href="/account" passHref>
+                                <Button as="a" variant="ghost" mr={2}>
+                                    Account
+                                </Button>
+                            </NextLink>
+                        }
                         <Avatar size="sm" src={user?.photoUrl} />
                     </Flex>
                 </Flex>
