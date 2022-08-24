@@ -8,7 +8,7 @@ import { getAllFeedback } from '@/lib/db-admin';
 import Feedback from '@/components/Feedback';
 import FeedbackLink from '@/components/FeedbackLink';
 
-const SITE_ID = 'giKz8H8PFdA3jsIgtn0k';
+const SITE_ID = 'vJwnPPJaDu7l5oW2r4wQ';
 
 export async function getStaticProps(context) {
   const { feedback } = await getAllFeedback(SITE_ID);
@@ -38,7 +38,6 @@ export default function Home({ allFeedback }) {
           `
               }}
             />
-            <title>Fast Feedback</title>
           </Head>
           <Icon color="black" name="logo" boxSize="12" mb={2} />
           <Text mb={4} fontSize="lg" py={4}>
