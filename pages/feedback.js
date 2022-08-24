@@ -1,19 +1,40 @@
 import useSWR from 'swr'
 
 import { useAuth } from '@/lib/auth'
-import EmptyState from '@/components/EmptyState'
+import FeedbackEmptyState from '@/components/FeedbackEmptyState';
+import Page from '@/components/Page';
 import FeedbackTableSkeleton from '@/components/FeedbackTableSkeleton'
 import DashboardShell from '@/components/DashboardShell'
 import fetcher from '@/utils/fetcher'
 import FeedbackTable from '@/components/FeedbackTable'
 import FeedbackTableHeader from '@/components/FeedbackTableHeader'
 
-export default function MyFeedback() {
+function MyFeedback() {
     const { user } = useAuth()
     const { data } = useSWR(user ? [ '/api/feedback', user.token ] : null, fetcher)
 
-    return <DashboardShell>
-        <FeedbackTableHeader />
-        {!data ? <FeedbackTableSkeleton /> : (data.feedback.length ? <FeedbackTable feedback={data.feedback} /> : <EmptyState />)}
-    </DashboardShell>
+    if (!data) {
+        return (
+            <DashboardShell>
+                <FeedbackTableHeader />
+                <FeedbackTableSkeleton />
+            </DashboardShell>
+        );
+    }
+    return (
+        <DashboardShell>
+            <FeedbackTableHeader />
+            {data.feedback.length ? (
+                <FeedbackTable feedback={data.feedback} />
+            ) : (
+                <FeedbackEmptyState />
+            )}
+        </DashboardShell>
+    );
+}
+
+export default function MyFeedbackPage() {
+    return <Page name="My Feedback" path="/feedback">
+        <MyFeedback />
+    </Page>
 }
