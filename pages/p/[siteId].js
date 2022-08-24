@@ -27,7 +27,7 @@ export async function getStaticPaths() {
     }))
     return {
         paths,
-        fallback: false,
+        fallback: true,
     }
 }
 
@@ -47,8 +47,9 @@ const FeedbackPage = ({ initialFeedback }) => {
             createdAt: new Date().toISOString(),
             status: "pending",
             text: inputEl.current.value,
-            provider: auth.user.provider
+            provider: auth.user.provider,
         }
+        inputEl.current.value = '';
         setAllFeedback([ newfeedback, ...allFeedback ]);
         createFeedback(newfeedback);
     }
@@ -58,16 +59,15 @@ const FeedbackPage = ({ initialFeedback }) => {
             <FormControl my={8}>
                 <FormLabel htmlFor="comment">Comment</FormLabel>
                 <Input ref={inputEl} id="comment" placeholder="Leave a comment" />
-                <Button mt={4} type="submit" fontWeight="medium">
+                <Button mt={4} type="submit" fontWeight="medium" isDisabled={router.isFallback}>
                     Add Comment
                 </Button>
             </FormControl>
         </Box>
-        {
+        {allFeedback &&
             allFeedback.map((feedback) => (
                 <Feedback key={feedback.id} {...feedback} />
-            ))
-        }
+            ))}
     </Box >
 }
 
