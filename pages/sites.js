@@ -35,7 +35,6 @@ function Dashboard() {
 
     return (
         <DashboardShell>
-            <SiteTableHeader />
             <SiteTableHeader isPaidAccount={isPaidAccount} />
             {isPaidAccount ? <SiteEmptyState /> : <UpgradeEmptyState />}
         </DashboardShell>
@@ -43,7 +42,7 @@ function Dashboard() {
 }
 
 export default function DashboardPage() {
-    return <Page name="Dashboard" path="/dashboard">
+    return <Page name="Sites" path="/sites">
         <Dashboard />
     </Page>
 }

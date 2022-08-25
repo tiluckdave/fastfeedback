@@ -34,7 +34,6 @@ const FeedbackTableSkeleton = () => {
             <tbody>
                 <SkeletonRow width="75px" />
                 <SkeletonRow width="125px" />
-                <SkeletonRow width="50px" />
                 <SkeletonRow width="100px" />
                 <SkeletonRow width="75px" />
             </tbody>
