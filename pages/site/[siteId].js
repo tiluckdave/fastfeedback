@@ -39,7 +39,6 @@ export async function getStaticPaths() {
 }
 
 const FeedbackPage = ({ initialFeedback, site }) => {
-    console.log(site)
     const { user, loading } = useAuth();
     const router = useRouter();
     const inputEl = useRef();
