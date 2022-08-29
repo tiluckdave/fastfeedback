@@ -67,9 +67,9 @@ const EditSiteModal = ({ settings, siteId, children }) => {
                             <Switch
                                 key={settings?.timestamp}
                                 {...register('timestamp')}
-                                color="green"
+                                colorScheme="green"
                                 display="inline"
-                                defaultIsChecked={settings?.timestamp}
+                                defaultChecked={settings?.timestamp}
                             />
                             <FormLabel ml={2} mt={4} display="inline" htmlFor="show-timestamp">
                                 Show Timestamp
@@ -79,9 +79,9 @@ const EditSiteModal = ({ settings, siteId, children }) => {
                             <Switch
                                 key={settings?.icons}
                                 {...register('icons')}
-                                color="green"
+                                colorScheme="green"
                                 display="inline"
-                                defaultIsChecked={settings?.icons}
+                                defaultChecked={settings?.icons}
                             />
                             <FormLabel ml={2} display="inline" htmlFor="show-icons">
                                 Show Icon
@@ -91,9 +91,9 @@ const EditSiteModal = ({ settings, siteId, children }) => {
                             <Switch
                                 key={settings?.ratings}
                                 {...register('ratings')}
-                                color="green"
+                                colorScheme="green"
                                 display="inline"
-                                defaultIsChecked={settings?.ratings}
+                                defaultChecked={settings?.ratings}
                             />
                             <FormLabel ml={2} display="inline" htmlFor="show-ratings">
                                 Show Ratings
