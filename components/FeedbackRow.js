@@ -23,7 +23,7 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
                 <Code>{route || '/'}</Code>
             </Td>
             <Td>
-                <Switch color="green" onChange={toggleFeedback} isChecked={isChecked} />
+                <Switch colorScheme="green" onChange={toggleFeedback} isChecked={isChecked} />
             </Td>
             <Td>
                 <DeleteFeedbackButton feedbackId={id} />
