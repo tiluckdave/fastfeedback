@@ -4,7 +4,7 @@ import { Box, Button, Link, Flex, Stack, Text } from '@chakra-ui/react'
 import { useAuth } from '@/lib/auth'
 import Icon from '@/components/Icon'
 
-import { getAllFeedback } from '@/lib/db-admin';
+import { getAllFeedback, getSite } from '@/lib/db-admin';
 import Feedback from '@/components/Feedback';
 import FeedbackLink from '@/components/FeedbackLink';
 import LoginButtons from '@/components/LoginButtons';
@@ -13,16 +13,18 @@ const SITE_ID = 'vJwnPPJaDu7l5oW2r4wQ';
 
 export async function getStaticProps(context) {
   const { feedback } = await getAllFeedback(SITE_ID);
+  const { site } = await getSite(SITE_ID);
 
   return {
     props: {
-      allFeedback: feedback
+      allFeedback: feedback,
+      site
     },
     revalidate: 1
   };
 }
 
-export default function Home({ allFeedback }) {
+export default function Home({ allFeedback, site }) {
   const auth = useAuth()
 
   return (
@@ -78,9 +80,14 @@ export default function Home({ allFeedback }) {
         margin="0 auto"
         mt={8}
       >
-        <FeedbackLink siteId={SITE_ID} />
-        {allFeedback.map((feedback) => (
-          <Feedback key={feedback.id} {...feedback} />
+        <FeedbackLink paths={[ SITE_ID ]} />
+        {allFeedback.map((feedback, index) => (
+          <Feedback
+            key={feedback.id}
+            settings={site?.settings}
+            isLast={index === allFeedback.length - 1}
+            {...feedback}
+          />
         ))}
       </Box>
     </>

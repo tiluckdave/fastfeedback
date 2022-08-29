@@ -33,7 +33,12 @@ export default function AddSiteModal({ children }) {
             authorId: auth.user.uid,
             createdAt: new Date().toISOString(),
             name,
-            url
+            url,
+            settings: {
+                icons: true,
+                timestamp: true,
+                ratings: false
+            }
         }
         const { id } = createSite(newSite);
         toast({

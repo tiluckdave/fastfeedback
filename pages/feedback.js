@@ -9,7 +9,7 @@ import fetcher from '@/utils/fetcher'
 import FeedbackTable from '@/components/FeedbackTable'
 import FeedbackTableHeader from '@/components/FeedbackTableHeader'
 
-function MyFeedback() {
+function AllFeedback() {
     const { user } = useAuth()
     const { data } = useSWR(user ? [ '/api/feedback', user.token ] : null, fetcher)
 
@@ -24,7 +24,7 @@ function MyFeedback() {
     return (
         <DashboardShell>
             <FeedbackTableHeader />
-            {data.feedback.length ? (
+            {data?.feedback?.length ? (
                 <FeedbackTable feedback={data.feedback} />
             ) : (
                 <FeedbackEmptyState />
@@ -33,8 +33,8 @@ function MyFeedback() {
     );
 }
 
-export default function MyFeedbackPage() {
+export default function AllFeedbackPage() {
     return <Page name="My Feedback" path="/feedback">
-        <MyFeedback />
+        <AllFeedback />
     </Page>
 }
