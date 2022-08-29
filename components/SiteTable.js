@@ -4,6 +4,7 @@ import { parseISO, format } from 'date-fns'
 import NextLink from 'next/link';
 
 import { Table, Tr, Td, Th } from "@/components/Table";
+import DeleteSiteButton from './DeleteSiteButton';
 
 const SiteTable = ({ sites }) => {
     return <Box overflowX="scroll">
@@ -40,6 +41,9 @@ const SiteTable = ({ sites }) => {
                             </NextLink>
                         </Td>
                         <Td>{format(parseISO(site.createdAt), 'PPpp')}</Td>
+                        <Td>
+                            <DeleteSiteButton siteId={site.id} />
+                        </Td>
                     </Box>
                 ))}
             </tbody>
