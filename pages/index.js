@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Box, Button, Link, Flex, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Text } from '@chakra-ui/react'
 
 import { useAuth } from '@/lib/auth'
 import Icon from '@/components/Icon'
@@ -12,7 +12,7 @@ import Footer from '@/components/Footer';
 
 const SITE_ID = process.env.NEXT_PUBLIC_HOME_PAGE_SITE_ID;
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const { feedback } = await getAllFeedback(SITE_ID);
   const { site } = await getSite(SITE_ID);
 
