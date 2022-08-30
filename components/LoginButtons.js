@@ -19,7 +19,7 @@ const LoginButtons = () => {
                     transform: 'scale(0.95)'
                 }}
             >
-                <Icon name="github" boxSize="7" mr="2" />Sign In with GitHub
+                <Icon name="github" boxSize="7" mr="2" />Continue with GitHub
             </Button>
             <Button
                 onClick={(e) => auth.signinWithGoogle()}
@@ -32,7 +32,7 @@ const LoginButtons = () => {
                     transform: 'scale(0.95)'
                 }}
             >
-                <Icon name="google" boxSize="7" mr="2" />Sign In with Google
+                <Icon name="google" boxSize="7" mr="2" />Continue with Google
             </Button>
         </Stack>
     );

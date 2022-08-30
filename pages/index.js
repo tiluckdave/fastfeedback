@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Box, Button, Link, Flex, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Text } from '@chakra-ui/react'
 
 import { useAuth } from '@/lib/auth'
 import Icon from '@/components/Icon'
@@ -8,10 +8,11 @@ import { getAllFeedback, getSite } from '@/lib/db-admin';
 import Feedback from '@/components/Feedback';
 import FeedbackLink from '@/components/FeedbackLink';
 import LoginButtons from '@/components/LoginButtons';
+import Footer from '@/components/Footer';
 
-const SITE_ID = 'vJwnPPJaDu7l5oW2r4wQ';
+const SITE_ID = process.env.NEXT_PUBLIC_HOME_PAGE_SITE_ID;
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const { feedback } = await getAllFeedback(SITE_ID);
   const { site } = await getSite(SITE_ID);
 
@@ -48,7 +49,7 @@ export default function Home({ allFeedback, site }) {
               Fast Feedback
             </Text>
 
-            {` Is the easiest way to add comments or reviews to your static site. It's still a work-in-progress, but you can try it out by logging in. Be aware that you will loose all your sites and feedback once we shift to the production database`}
+            {` Is the easiest way to add comments or reviews to your static site. We are still in Test mode. Be aware that you will loose all your sites and feedback once we shift to the production mode`}
           </Text>
           {auth.user ? (
             <Button
@@ -90,6 +91,7 @@ export default function Home({ allFeedback, site }) {
           />
         ))}
       </Box>
+      <Footer />
     </>
   )
 }

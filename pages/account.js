@@ -15,25 +15,32 @@ import {
 } from '@chakra-ui/react';
 
 import { useAuth } from '@/lib/auth';
-import { goToBillingPortal } from '@/lib/db';
+import { goToBillingPortal, createCheckoutSession } from '@/lib/db';
 import Page from '@/components/Page';
 import DashboardShell from '@/components/DashboardShell';
 
-const FeedbackUsage = () => (
-    <StatGroup>
-        <Stat>
-            <StatLabel color="gray.700">Feedback</StatLabel>
-            <StatNumber fontWeight="medium">∞</StatNumber>
-            <StatHelpText>10,000 limit</StatHelpText>
-        </Stat>
+const FeedbackUsage = ({ stripeRole }) => {
+    if (stripeRole === 'pro') {
+        return <StatGroup>
+            <Stat>
+                <StatLabel color="gray.700">Feedback</StatLabel>
+                <StatNumber fontWeight="medium">∞</StatNumber>
+                <StatHelpText>Unlimited Feedback</StatHelpText>
+            </Stat>
 
-        <Stat>
-            <StatLabel color="gray.700">Sites</StatLabel>
-            <StatNumber fontWeight="medium">1/∞</StatNumber>
-            <StatHelpText>Unlimited Sites</StatHelpText>
-        </Stat>
-    </StatGroup>
-);
+            <Stat>
+                <StatLabel color="gray.700">Sites</StatLabel>
+                <StatNumber fontWeight="medium">∞</StatNumber>
+                <StatHelpText>Unlimited Sites</StatHelpText>
+            </Stat>
+        </StatGroup>
+    }
+
+    return <Box>
+        Click on Upgrade to Pro. 😎
+    </Box>
+
+};
 
 const SettingsTable = ({ stripeRole, children }) => (
     <Box
@@ -75,6 +82,7 @@ const SettingsTable = ({ stripeRole, children }) => (
 function Account() {
     const { user, signout } = useAuth();
     const [ isBillingLoading, setBillingLoading ] = useState(false);
+    const [ isCheckoutLoading, setCheckoutLoading ] = useState(false);
 
     return (
         <DashboardShell>
@@ -95,7 +103,7 @@ function Account() {
                     <Text>{user?.email}</Text>
                 </Flex>
                 <SettingsTable stripeRole={user?.stripeRole}>
-                    <FeedbackUsage />
+                    <FeedbackUsage stripeRole={user?.stripeRole} />
                     <Text my={4}>
                         Fast Feedback uses Stripe to update, change, or cancel your
                         subscription. You can also update card information and billing
@@ -105,24 +113,45 @@ function Account() {
                         <Button variant="ghost" ml={4} onClick={() => signout()}>
                             Log Out
                         </Button>
-                        <Button
-                            onClick={() => {
-                                setBillingLoading(true);
-                                goToBillingPortal();
-                            }}
-                            backgroundColor="gray.900"
-                            color="white"
-                            fontWeight="medium"
-                            ml={4}
-                            isLoading={isBillingLoading}
-                            _hover={{ bg: 'gray.700' }}
-                            _active={{
-                                bg: 'gray.800',
-                                transform: 'scale(0.95)'
-                            }}
-                        >
-                            Manage Billing
-                        </Button>
+                        {user?.stripeRole === 'pro' ? (
+                            <Button
+                                onClick={() => {
+                                    setBillingLoading(true);
+                                    goToBillingPortal();
+                                }}
+                                backgroundColor="gray.900"
+                                color="white"
+                                fontWeight="medium"
+                                ml={4}
+                                isLoading={isBillingLoading}
+                                _hover={{ bg: 'gray.700' }}
+                                _active={{
+                                    bg: 'gray.800',
+                                    transform: 'scale(0.95)'
+                                }}
+                            >
+                                Manage Billing
+                            </Button>
+                        ) : (
+                            <Button
+                                onClick={() => {
+                                    setCheckoutLoading(true);
+                                    createCheckoutSession(user.uid);
+                                }}
+                                backgroundColor="gray.900"
+                                color="white"
+                                fontWeight="medium"
+                                ml={4}
+                                isLoading={isCheckoutLoading}
+                                _hover={{ bg: 'gray.700' }}
+                                _active={{
+                                    bg: 'gray.800',
+                                    transform: 'scale(0.95)'
+                                }}
+                            >
+                                Upgrade to Pro
+                            </Button>
+                        )}
                     </Flex>
                 </SettingsTable>
             </Flex>

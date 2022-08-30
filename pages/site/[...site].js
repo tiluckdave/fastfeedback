@@ -40,7 +40,7 @@ const FeedbackPage = () => {
             authorId: user.uid,
             createdAt: new Date().toISOString(),
             status: "pending",
-            text: inputEl.current.value,
+            text: inputEl.current.value.replace('\n', '\n\n'),
             provider: user.provider,
         }
         inputEl.current.value = '';
