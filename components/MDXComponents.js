@@ -6,12 +6,10 @@ import styled from '@emotion/styled';
 import { css, jsx } from '@emotion/react'
 import {
     Box,
-    Callout,
     Code,
     Heading,
     Kbd,
     Link,
-    PseudoBox,
     Text,
     Divider,
     useColorMode
@@ -76,31 +74,6 @@ const CustomLink = (props) => {
     return <Link color={color[ colorMode ]} isExternal {...props} />;
 };
 
-const Quote = (props) => {
-    const { colorMode } = useColorMode();
-    const bgColor = {
-        light: 'blue.50',
-        dark: 'blue.900'
-    };
-
-    return (
-        <Callout
-            mt={4}
-            w="98%"
-            bg={bgColor[ colorMode ]}
-            variant="left-accent"
-            status="info"
-            css={{
-                '> *:first-of-type': {
-                    marginTop: 0,
-                    marginLeft: 8
-                }
-            }}
-            {...props}
-        />
-    );
-};
-
 const DocsHeading = (props) => (
     <Heading
         css={{
@@ -124,24 +97,6 @@ const DocsHeading = (props) => (
     >
         <Box pointerEvents="auto">
             {props.children}
-            {props.id && (
-                <PseudoBox
-                    aria-label="anchor"
-                    as="a"
-                    color="blue.500"
-                    fontWeight="normal"
-                    outline="none"
-                    _focus={{
-                        opacity: 1,
-                        boxShadow: 'outline'
-                    }}
-                    opacity="0"
-                    ml="0.375rem"
-                    href={`#${props.id}`}
-                >
-                    #
-                </PseudoBox>
-            )}
         </Box>
     </Heading>
 );
@@ -182,7 +137,6 @@ const MDXComponents = {
     ul: (props) => <Box as="ul" pt={2} pl={4} ml={2} {...props} />,
     ol: (props) => <Box as="ol" pt={2} pl={4} ml={2} {...props} />,
     li: (props) => <Box as="li" pb={1} {...props} />,
-    blockquote: Quote
 };
 
 export { CustomLink };
