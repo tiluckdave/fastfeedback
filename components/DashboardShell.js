@@ -9,6 +9,7 @@ import {
 import Icon from '@/components/Icon';
 import { useAuth } from '@/lib/auth';
 import NextLink from 'next/link';
+import Footer from './Footer';
 
 const DashboardShell = ({ children }) => {
     const { user } = useAuth();
@@ -55,6 +56,7 @@ const DashboardShell = ({ children }) => {
             <Flex margin="0 auto" direction="column" maxW="1250px" px={[ 0, 8, 8 ]}>
                 {children}
             </Flex>
+            <Footer />
         </Box>
     );
 };

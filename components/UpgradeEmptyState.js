@@ -37,7 +37,7 @@ const UpgradeEmptyState = () => {
                     transform: 'scale(0.95)'
                 }}
             >
-                Upgrade to Starter
+                Upgrade to Pro
             </Button>
         </Flex>
     );

@@ -1,6 +1,10 @@
-import { ChakraProvider, CSSReset } from '@chakra-ui/react'
+import {
+  ChakraProvider,
+  CSSReset
+} from '@chakra-ui/react'
 import { DefaultSeo } from 'next-seo';
 import { Global, css } from '@emotion/react'
+import { MDXProvider } from '@mdx-js/react';
 
 import { AuthProvider } from '@/lib/auth'
 import customTheme from '@/styles/theme'
@@ -10,6 +14,7 @@ import Script from "next/script";
 import { useEffect } from 'react';
 import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
+import MDXComponents from '@/components/MDXComponents';
 
 const GlobalStyle = ({ children }) => {
   return (
@@ -50,18 +55,19 @@ function App({ Component, pageProps }) {
   return <ChakraProvider theme={customTheme}>
     <GlobalStyle />
     <AuthProvider>
-      <DefaultSeo {...SEO} />
-      <Head>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-      </Head>
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
-      />
+      <MDXProvider components={MDXComponents}>
+        <DefaultSeo {...SEO} />
+        <Head>
+          <meta content="width=device-width, initial-scale=1" name="viewport" />
+        </Head>
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+        />
 
-      <Script id="google-analytics-script" strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
+        <Script id="google-analytics-script" strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
@@ -69,11 +75,12 @@ function App({ Component, pageProps }) {
             page_path: window.location.pathname,
           });
         `,
-        }}
-      />
-      <Component {...pageProps} />
+          }}
+        />
+        <Component {...pageProps} />
+      </MDXProvider>
     </AuthProvider>
-  </ChakraProvider>
+  </ChakraProvider >
 }
 
 export default App
