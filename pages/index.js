@@ -48,7 +48,6 @@ export default function Home({ allFeedback, site }) {
             <Text as="span" fontWeight="bold" display="inline">
               Fast Feedback (Alpha)
             </Text>
-
             {` Is the easiest way to add comments or reviews to your static site.`}
           </Text>
           <Text mb={4} fontSize="lg" pb={4}>
