@@ -44,12 +44,14 @@ export default function Home({ allFeedback, site }) {
             />
           </Head>
           <Icon color="black" name="logo" boxSize="12" mb={2} />
-          <Text mb={4} fontSize="lg" py={4}>
+          <Text mb={4} fontSize="lg" pt={4}>
             <Text as="span" fontWeight="bold" display="inline">
-              Fast Feedback
+              Fast Feedback (Alpha)
             </Text>
-
-            {` Is the easiest way to add comments or reviews to your static site. We are still in Test mode. Be aware that you will loose all your sites and feedback once we shift to the production mode`}
+            {` Is the easiest way to add comments or reviews to your static site.`}
+          </Text>
+          <Text mb={4} fontSize="lg" pb={4}>
+            Use 4242 4242 4242 4242 as your credit card number to activate Pro for free!
           </Text>
           {auth.user ? (
             <Button
